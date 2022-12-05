@@ -1,25 +1,37 @@
 var assetData = {
-	tree1: [
-		[400, 500],
-		[83, 35],
-		[830, 135],
+	tree: [
+		[41, 65],
+		[
+			[400, 500],
+			[83, 35],
+			[830, 135],
+		],
 	],
 
 	bench_dark: [
-		[18, 426],
-		[120, 230],
+		[46, 64],
+		[
+			[18, 426],
+			[120, 230],
+		],
 	],
 
 	flower_bush_white: [
-		[600, 500],
-		[183, 35],
-		[130, 135],
+		[28, 28],
+		[
+			[600, 500],
+			[183, 35],
+			[130, 135],
+		],
 	],
 
 	flower_bush_yellow: [
-		[500, 600],
-		[138, 53],
-		[103, 153],
+		[28, 28],
+		[
+			[500, 600],
+			[138, 53],
+			[103, 153],
+		],
 	],
 };
 
@@ -34,15 +46,17 @@ function loadAssets() {
 	console.log(map);
 
 	for (var i in assetData) {
-		for (var j in assetData[i]) {
-			// console.log(assetData[i][j][0] + ":" + assetData[i][j][1]);
+		for (var j in assetData[i][1]) {
+			// console.log(assetData[i][1][0] + ":" + assetData[i][1][j] + "+-n");
 
 			var img = document.createElement("img");
 			img.classList.add("asset");
 			img.src = "./images/map_assets/" + i + ".png";
 			img.style.position = "absolute";
-			img.style.top = assetData[i][j][0] + "px";
-			img.style.left = assetData[i][j][1] + "px";
+			img.style.top = assetData[i][1][j][0] + "px";
+			img.style.left = assetData[i][1][j][1] + "px";
+			img.style.width = assetData[i][0][0] + "px";
+			img.style.height = assetData[i][0][1] + "px";
 			map.appendChild(img);
 		}
 	}
@@ -68,6 +82,8 @@ function loadAssets() {
 		body.style.left = pfpData[i].position[1] + "px";
 
 		pot.src = "./images/map_assets/Pot.png";
+		pot.style.height = "17px";
+		pot.style.width = "17px";
 
 		body.appendChild(per);
 		body.appendChild(pot);
