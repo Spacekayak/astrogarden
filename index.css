@@ -1,8 +1,3 @@
-.container {
-	width: 100%;
-	height: 100%;
-}
-
 body {
 	width: 100vw;
 	height: 100vh;
@@ -15,21 +10,37 @@ body {
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+	font-family: "monocraft", sans-serif;
+}
+
+@font-face {
+	font-family: "monocraft";
+	src: url("./fonts/monocraft/Monocraft.otf");
+}
+
+@font-face {
+	font-family: "PIXEBOB";
+	src: url("./fonts/pixbob/PIXBOB\ LITE.otf");
 }
 
 #camera {
-	width: 100%;
-	height: 100%;
-	background-color: aqua;
-	position: absolute;
-	animation: cameraMotion 40s infinite ease-in-out;
+	/* position: absolute; */
+	/* animation: cameraMotion 40s infinite ease-in-out; */
+	display: block;
+	max-width: 100%;
+	max-height: 100%;
+	aspect-ratio: 16/9;
+	overflow: hidden;
+	background-color: #692f64;
+	position: relative;
 }
 
 #map {
 	background-color: #2f6943;
 	background-image: url("./images/map_assets/grassnoise.png");
-	width: 2580px;
-	height: 2580px;
+	/* animation: cameraMotion 40s infinite ease-in-out; */
+
+	background-size: 187px 195px;
 	transform: scale(3);
 	transform-origin: 0% 0% 0;
 
@@ -38,23 +49,38 @@ body {
 	left: 0;
 }
 
-#camera {
-	position: relative;
-}
-
 .pxperson {
 	animation: pixelBob 2s infinite;
 	position: absolute;
 	left: -7px;
+	z-index: 2;
 }
 
 .pxpot {
 	/* position: absolute; */
-	top: 22px;
+	top: 21px;
+	z-index: 3;
 	/* left: 50%; */
 }
 
-.pfpasset {
+.flower {
+	position: absolute;
+	animation: pixelBob 2s infinite;
+	top: 8px;
+	left: 3px;
+	z-index: 1;
+}
+
+.flwprem {
+	top: 2px;
+	left: -1px;
+}
+
+.shadow {
+	position: absolute;
+	z-index: -1;
+	top: 30px;
+	left: 1px;
 }
 
 @keyframes cameraMotion {
@@ -104,7 +130,57 @@ body {
 	50% {
 		margin-top: 1px;
 	}
-	100% {
+	52% {
+		margin-top: 1px;
+	}
+	60% {
 		margin-top: 0px;
 	}
+}
+
+.pfpasset {
+	background-color: #692f64;
+	position: relative;
+}
+
+/* Tooltip container */
+.tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+	font-size: 3px;
+	left: 50%;
+	transform: translate(-50%, 0%);
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+	visibility: hidden;
+
+	background-color: rgb(255, 255, 255);
+	color: rgb(41, 41, 41);
+	text-align: center;
+	padding: 1px 3px;
+	top: 2px;
+	/* border-radius: 20px; */
+	border: 1px solid rgb(41, 41, 41);
+	backdrop-filter: blur(3px);
+	/* Position the tooltip text - see examples below! */
+	position: absolute;
+
+	z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+
+.gamecont {
+	width: 100vw;
+	height: 100vh;
+	padding: 50px;
+	position: relative;
+	background-color: rgb(25, 32, 30);
+	overflow: hidden;
 }
