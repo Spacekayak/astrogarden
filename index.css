@@ -261,3 +261,7 @@ body {
 .unscrollable {
 	overflow: hidden !important;
 }
+
+a {
+	color: #ff3494;
+}
