@@ -125,7 +125,7 @@ body {
 
 .gamecont h1 {
 	/* color: #3f664c; */
-	font-family: "PIXEBOB", sans-serif;
+	font-family: "PIXEBOB", "monocraft", sans-serif;
 	font-size: 72px;
 	text-align: center;
 }
