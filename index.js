@@ -16,6 +16,9 @@ function initCovered() {
 
 function loadAssets() {
 	var map = document.getElementById("map");
+	var camera = document.getElementById("camera");
+	var button = document.getElementById("playbutton");
+	var loader = document.getElementById("loader");
 	initCovered();
 	// console.log(covered);
 	map.style.width = mapWidth + "px";
@@ -173,6 +176,10 @@ function loadAssets() {
 		// console.log(pxls[i].offsetLeft + ":" + pxls[i].offsetTop);
 		// console.log(ctrx + ":" + ctry);
 	}
+
+	camera.style.display = "block";
+	button.style.display = "flex";
+	loader.style.display = "none";
 }
 
 function areaFilled(x, y) {

@@ -152,6 +152,7 @@ body {
 	background-color: #2a704a;
 	position: relative;
 	animation: load 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+	display: none;
 }
 
 @media only screen and (max-width: 768px) {
@@ -276,6 +277,10 @@ a {
 
 .pixel2 {
 	animation: load 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#playbutton {
+	display: none;
 }
 
 .shy {
