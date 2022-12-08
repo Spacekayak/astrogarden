@@ -1,6 +1,8 @@
 var covered = [];
-var mapWidth = 2580,
-	mapHeight = 2580;
+var mapWidth = 458,
+	mapHeight = 458;
+
+var radius = 18;
 
 function initCovered() {
 	for (var i = 0; i < mapWidth; ++i) {
@@ -31,9 +33,19 @@ function loadAssets() {
 			img.style.width = assetData[i][0][0] + "px";
 			img.style.height = assetData[i][0][1] + "px";
 
-			for (var x = img.offsetLeft; x < img.offsetLeft + img.style.width; ++x) {
-				for (var y = img.offsetTop; y < img.offsetTop + img.style.height; ++y) {
-					covered[x][y] = true;
+			for (
+				var x = assetData[i][1][j][0] - radius;
+				x < assetData[i][1][j][0] + assetData[i][0][0] + radius;
+				++x
+			) {
+				for (
+					var y = assetData[i][1][j][1] - radius;
+					y < assetData[i][1][j][1] + assetData[i][0][1] + radius;
+					++y
+				) {
+					// console.log(x + ":" + y);
+					if (x >= 0 && x <= mapWidth && y >= 0 && y <= mapHeight)
+						covered[x][y] = true;
 				}
 			}
 
@@ -124,48 +136,59 @@ function loadAssets() {
 	}
 
 	pxls = document.getElementsByClassName("tooltip");
-	console.log(pxls);
+	// console.log(pxls);
 	ctrx = 0;
 	ctry = 0;
-	radius = 6;
-	for (var i in pxls) {
-		if (!covered[ctrx][ctry]) {
+	reset = false;
+
+	for (var i = 0; i < pxls.length; ++i) {
+		// console.log(covered[ctrx][ctry]);
+		if (reset) {
+			i--;
+		}
+		console.log(i);
+		reset = areaFilled(ctrx, ctry);
+
+		if (i == "length") break;
+		if (!reset) {
 			pxls[i].style.left = ctrx + "px";
 			pxls[i].style.top = ctry + "px";
-			covered[ctrx][ctry] = true;
-			for (var rad = 1; rad < radius; ++rad) {
-				if (ctrx - rad >= 0 && ctry - rad >= 0) {
-					covered[ctrx - rad][ctry - rad] = true;
-				} else if (ctrx - rad >= 0) {
-					covered[ctrx - rad][ctry] = true;
-				} else if (ctry - rad >= 0) {
-					covered[ctrx][ctry - rad] = true;
-				}
-
-				if (ctrx + rad <= mapWidth && ctry + rad <= mapHeight) {
-					covered[ctrx + rad][ctry + rad] = true;
-				} else if (ctrx + rad <= mapWidth) {
-					covered[ctrx + rad][ctry] = true;
-				} else if (ctry + rad <= mapHeight) {
-					covered[ctrx][ctry + rad] = true;
-				}
-
-				if (ctrx - rad >= 0 && ctry + rad <= mapHeight) {
-					covered[ctrx - rad][ctry + rad] = true;
-				}
-				if (ctrx + rad <= mapWidth && ctry - rad >= 0) {
-					covered[ctrx + rad][ctry - rad] = true;
-				}
-			}
+			fillArea(ctrx, ctry);
 		} else {
-			if (ctrx != mapWidth) {
+			if (ctrx != mapWidth && ctrx + radius <= mapWidth) {
 				ctrx++;
 			} else {
-				if (ctry != mapHeight) {
+				console.log("im here");
+				if (ctry != mapHeight && ctry + radius <= mapHeight) {
 					ctry++;
 					ctrx = 0;
 				}
 			}
+		}
+		console.log(ctrx + ":" + ctry);
+
+		// console.log(i);
+		// console.log(pxls[i].innerHTML);
+		// console.log(pxls[i].offsetLeft + ":" + pxls[i].offsetTop);
+		// console.log(ctrx + ":" + ctry);
+	}
+}
+
+function areaFilled(x, y) {
+	for (xrad = x - radius; xrad < x + radius; ++xrad) {
+		for (yrad = y - radius; yrad < y + radius; ++yrad) {
+			if (xrad >= 0 && xrad <= mapWidth && yrad >= 0 && yrad <= mapHeight)
+				if (covered[xrad][yrad]) return true;
+		}
+	}
+	return false;
+}
+
+function fillArea(x, y) {
+	for (xrad = x - radius; xrad < x + radius; ++xrad) {
+		for (yrad = y - radius; yrad < y + radius; ++yrad) {
+			if (xrad >= 0 && xrad <= mapWidth && yrad >= 0 && yrad <= mapHeight)
+				covered[xrad][yrad] = true;
 		}
 	}
 }

@@ -11,6 +11,34 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: "monocraft", sans-serif;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+}
+
+.asset {
+	user-select: none;
+	pointer-events: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f110;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: rgba(166, 194, 201, 0.247);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: rgb(187, 125, 167);
 }
 
 @font-face {
@@ -28,11 +56,20 @@ body {
 	/* animation: cameraMotion 40s infinite ease-in-out; */
 	display: block;
 	max-width: 100%;
+	height: 100%;
 	max-height: 100%;
 	aspect-ratio: 16/9;
-	overflow: hidden;
-	background-color: #692f64;
+	object-fit: contain;
+	overflow: scroll;
+
+	background-color: #2a704a;
 	position: relative;
+}
+
+@media only screen and (max-width: 768px) {
+	#camera {
+		aspect-ratio: 9/16;
+	}
 }
 
 #map {
@@ -54,6 +91,9 @@ body {
 	position: absolute;
 	left: -7px;
 	z-index: 2;
+	user-select: none;
+	pointer-events: none;
+	-webkit-user-drag: none;
 }
 
 .pxpot {
@@ -120,9 +160,6 @@ body {
 	font-family: sans-serif;
 }
 
-#tickertape marquee {
-}
-
 @keyframes pixelBob {
 	0% {
 		margin-top: 0px;
@@ -139,7 +176,7 @@ body {
 }
 
 .pfpasset {
-	background-color: #692f64;
+	/* background-color: #692f64; */
 	position: relative;
 }
 
@@ -181,6 +218,24 @@ body {
 	height: 100vh;
 	padding: 50px;
 	position: relative;
-	background-color: rgb(25, 32, 30);
+	background-color: #85bfff;
+	background-image: url("./images/Blue\ BG.svg");
+	background-repeat: repeat-y;
+	background-size: cover;
+
+	background-position: 50% 15%;
+
 	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.gamecont h1 {
+	/* color: #3f664c; */
+	font-family: "PIXEBOB", "monocraft", sans-serif;
+}
+
+.gamecont p {
+	text-align: center;
 }
