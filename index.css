@@ -128,16 +128,14 @@ body {
 	font-family: "PIXEBOB", "monocraft", sans-serif;
 	font-size: 72px;
 	text-align: center;
+	animation: load 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+	max-width: 100%;
+	word-break: normal;
 }
 
 .gamecont p {
 	text-align: center;
-}
-
-.buttongroup {
-	display: flex;
-	flex-direction: row;
-	column-gap: 20px;
+	animation: load 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 #camera {
@@ -153,6 +151,7 @@ body {
 
 	background-color: #2a704a;
 	position: relative;
+	animation: load 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 @media only screen and (max-width: 768px) {
@@ -216,6 +215,15 @@ body {
 	}
 }
 
+@keyframes load {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
 /* Tooltip Setup */
 
 /* Tooltip container */
@@ -264,4 +272,14 @@ body {
 
 a {
 	color: #ff3494;
+}
+
+.pixel2 {
+	animation: load 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.shy {
+	visibility: hidden;
+	width: 0px;
+	position: absolute;
 }
