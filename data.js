@@ -36,10 +36,7 @@ var assetData = {
 
 var pfpData = [
 	{ url: "Anish MohammedAstroPixel_" },
-	{
-		url: "AKHIL BVS -  eth maxi",
-		premium: true,
-	},
+	{ url: "AKHIL BVS -  eth maxi", premium: true },
 	{ url: "Eemis" },
 	{ url: "KIRAN V K" },
 	{ url: "Keith Salins" },

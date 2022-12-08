@@ -3,6 +3,7 @@ var mapWidth = 458,
 	mapHeight = 458;
 
 var radius = 18;
+var moving = true;
 
 function initCovered() {
 	for (var i = 0; i < mapWidth; ++i) {
@@ -190,6 +191,24 @@ function fillArea(x, y) {
 			if (xrad >= 0 && xrad <= mapWidth && yrad >= 0 && yrad <= mapHeight)
 				covered[xrad][yrad] = true;
 		}
+	}
+}
+
+function toggleMotion() {
+	moving = !moving;
+	map = document.getElementById("map");
+	button = document.getElementById("playbutton");
+	camera = document.getElementById("camera");
+	if (moving) {
+		map.classList.add("pause");
+		camera.classList.remove("unscrollable");
+		button.innerText = "Resume Animation";
+		map.style.top = "0px";
+		map.style.left = "0px";
+	} else {
+		map.classList.remove("pause");
+		camera.classList.add("unscrollable");
+		button.innerText = "Pause Animation";
 	}
 }
 
