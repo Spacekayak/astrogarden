@@ -5,6 +5,7 @@ var assetData = {
 			[0, 2],
 			[200, 340],
 			[83, 70],
+			[283, 70],
 		],
 	],
 
@@ -80,4 +81,10 @@ var pfpData = [
 	{ url: "Santosh" },
 	{ url: "Upkaran" },
 	{ url: "Vandini" },
+
+	{ url: "Ankita2" },
+	{ url: "harsh.eth" },
+	{ url: "KUSH RATNA", premium: true },
+	{ url: "Sumxxt" },
+	{ url: "Vipra" },
 ];
