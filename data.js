@@ -36,7 +36,7 @@ var assetData = {
 };
 
 var pfpData = [
-	{ url: "AKHIL BVS (eth maxi)", premium: true },
+	{ url: "AKHIL BVS", premium: true, type: "ethmaxi" },
 	{ url: "Anish Mohammed" },
 	{ url: "Bhavnaaaaa" },
 	{ url: "Eemis" },
@@ -84,7 +84,7 @@ var pfpData = [
 
 	{ url: "Ankita2" },
 	{ url: "harsh.eth" },
-	{ url: "KUSH RATNA", premium: true },
+	{ url: "KUSH RATNA", premium: true, type: "space" },
 	{ url: "Sumxxt" },
 	{ url: "Vipra" },
 ];

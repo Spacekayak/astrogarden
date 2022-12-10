@@ -19,6 +19,10 @@ function loadAssets() {
 	var camera = document.getElementById("camera");
 	var button = document.getElementById("playbutton");
 	var loader = document.getElementById("loader");
+	var gamecont = document.getElementsByClassName("gamecont")[0];
+	gamecont.addEventListener("onmouseover", function () {
+		changeViewer(false);
+	});
 	initCovered();
 	// console.log(covered);
 	map.style.width = mapWidth + "px";
@@ -140,6 +144,16 @@ function loadAssets() {
 	}
 
 	pxls = document.getElementsByClassName("tooltip");
+	avatars = document.querySelectorAll(".tooltip");
+
+	avatars.forEach((avatar, i) => {
+		avatar.addEventListener("mouseover", function () {
+			changeViewer(true, pfpData[i].url, pfpData[i].premium, pfpData[i].type);
+		});
+		avatar.addEventListener("mouseout", function () {
+			changeViewer(false, pfpData[i].url, pfpData[i].premium, pfpData[i].type);
+		});
+	});
 	// console.log(pxls);
 	ctrx = 0;
 	ctry = 0;
@@ -147,6 +161,8 @@ function loadAssets() {
 
 	for (var i = 0; i < pxls.length; ++i) {
 		// console.log(covered[ctrx][ctry]);
+		// console.log(pfpData[i].url, i);
+
 		if (reset) {
 			i--;
 		}
@@ -216,6 +232,30 @@ function toggleMotion() {
 		map.classList.remove("pause");
 		camera.classList.add("unscrollable");
 		button.innerText = "Pause Animation";
+	}
+}
+
+async function changeViewer(show, name, premium, type) {
+	if (show) {
+		console.log("name:" + name);
+		viewer = document.getElementById("nftviewer");
+		viewer.classList.remove("nftviewerclose");
+		viewer.style.display = "flex";
+		img = document.getElementById("pxfg");
+		bgimg = document.getElementById("pxbg");
+		assetName = document.getElementById("assetName");
+
+		img.src = "./images/pfp_assets/" + name + ".png";
+		if (premium) {
+			bgimg.src = "./images/pxbackgrounds/" + type + ".png";
+		} else {
+			bgimg.src = "./images/pxbackgrounds/ethindia.png";
+		}
+		assetName.innerText = name;
+		// viewer.style.display = "flex";
+	} else {
+		viewer.classList.add("nftviewerclose");
+		// viewer.classList.remove("nftviewerclose");
 	}
 }
 

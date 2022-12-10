@@ -5,7 +5,6 @@ body {
 	height: 100vh;
 	overflow: hidden;
 	background-color: black;
-	position: relative;
 }
 
 * {
@@ -54,7 +53,7 @@ body {
 
 .asset {
 	user-select: none;
-	pointer-events: none;
+	/* pointer-events: none; */
 }
 
 /* Game Avatar Setup */
@@ -107,7 +106,7 @@ body {
 	width: 100vw;
 	height: 100vh;
 	padding: 50px;
-	position: relative;
+
 	background-color: #c4f0fa;
 	background-image: url("./images/Blue\ BG.svg");
 	background-repeat: repeat-y;
@@ -142,6 +141,7 @@ body {
 	/* position: absolute; */
 	/* animation: cameraMotion 40s infinite ease-in-out; */
 	display: block;
+	width: 100%;
 	max-width: 100%;
 	height: 100%;
 	max-height: 100%;
@@ -225,6 +225,15 @@ body {
 	}
 }
 
+@keyframes slideinleftbottom {
+	0% {
+		transform: translate(100%, 0);
+	}
+	100% {
+		transform: translate(0%, 0);
+	}
+}
+
 /* Tooltip Setup */
 
 /* Tooltip container */
@@ -281,10 +290,105 @@ a {
 
 #playbutton {
 	display: none;
+	box-shadow: inset 0px -105px rgba(0, 0, 0, 0.2);
 }
 
 .shy {
 	visibility: hidden;
 	width: 0px;
 	position: absolute;
+}
+
+.viewer {
+	display: flex;
+	flex-direction: row;
+	max-width: 100%;
+	height: 100%;
+	max-height: 100%;
+}
+
+#pxbg {
+	background-image: url("./images/pxbackgrounds/ethindia.png");
+	background-size: 160px 160px;
+	aspect-ratio: 1/1;
+	height: 160px;
+	width: 160px;
+	display: block;
+}
+
+#pxfg {
+	position: absolute;
+	background-image: url("./images/pfp_assets/Aadi.png");
+	background-size: 160px 160px;
+	aspect-ratio: 1/1;
+	height: 160px;
+	width: 160px;
+	display: block;
+}
+
+.nftimg {
+	position: relative;
+	border: 3px solid rgba(0, 0, 0, 0.3);
+}
+
+#nftviewer {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	border: 3px solid rgb(0, 0, 0, 0.5);
+
+	background-color: #ff3494;
+	padding: 10px;
+	width: fit-content;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	row-gap: 10px;
+
+	overflow: hidden;
+
+	animation: slideinleftbottom 2s ease-in-out;
+
+	display: none;
+	transition-duration: 1s;
+}
+
+#viewer {
+	position: relative;
+	background-color: #2a704a;
+	max-width: 100%;
+	height: 100%;
+	max-height: 100%;
+	overflow: hidden;
+}
+
+#nftviewer p {
+	width: 160px;
+	overflow-wrap: break-word;
+	color: white;
+}
+
+@media only screen and (max-width: 768px) {
+	#pxbg {
+		background-size: 80px 80px;
+		height: 80px;
+		width: 80px;
+	}
+
+	#pxfg {
+		background-size: 80px 80px;
+		height: 80px;
+		width: 80px;
+	}
+
+	#nftviewer p {
+		width: 80px;
+	}
+}
+.nftviewerclose {
+	right: -100% !important;
+	transition-delay: 1s;
+	transition-duration: 1s;
+	transform: rotate(30deg);
+	/* display: none; */
 }
