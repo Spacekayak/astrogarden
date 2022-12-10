@@ -53,6 +53,7 @@ body {
 
 .asset {
 	user-select: none;
+	animation: load2 1s;
 	/* pointer-events: none; */
 }
 
@@ -98,6 +99,7 @@ body {
 .pfpasset {
 	/* background-color: #692f64; */
 	position: relative;
+	animation: load2 1s;
 }
 
 /* Gamebox Layout */
@@ -167,7 +169,7 @@ body {
 	animation: cameraMotion 40s infinite ease-in-out;
 
 	background-size: 187px 195px;
-	transform: scale(3);
+	transform: scale(2.5);
 	transform-origin: 0% 0% 0;
 
 	position: absolute;
@@ -219,6 +221,15 @@ body {
 @keyframes load {
 	0% {
 		transform: scale(1.1);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes load2 {
+	0% {
+		transform: scale(0);
 	}
 	100% {
 		transform: scale(1);
@@ -349,10 +360,11 @@ a {
 
 	overflow: hidden;
 
-	animation: slideinleftbottom 2s ease-in-out;
+	animation: slideinleftbottom 2s cubic-bezier(0.71, 0, 0.33, 1.56);
 
 	display: none;
 	transition-duration: 1s;
+	transition-timing-function: ease-in-out;
 	box-shadow: inset -5px -5px rgba(0, 0, 0, 0.2),
 		inset 5px 5px rgba(255, 255, 255, 0.2);
 }
@@ -394,5 +406,6 @@ a {
 	transition-delay: 1s;
 	transition-duration: 1s;
 	transform: rotate(30deg);
+	transition-timing-function: cubic-bezier(0.71, 0, 0.33, 1.56);
 	/* display: none; */
 }

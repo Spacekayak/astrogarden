@@ -154,6 +154,15 @@ function loadAssets() {
 			changeViewer(false, pfpData[i].url, pfpData[i].premium, pfpData[i].type);
 		});
 	});
+
+	viewer = document.getElementById("nftviewer");
+	viewer.addEventListener("mouseover", function () {
+		viewer.classList.remove("nftviewerclose");
+	});
+	viewer.addEventListener("mouseout", function () {
+		viewer.classList.add("nftviewerclose");
+	});
+
 	// console.log(pxls);
 	ctrx = 0;
 	ctry = 0;
