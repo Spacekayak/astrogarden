@@ -308,7 +308,6 @@ a {
 }
 
 #pxbg {
-	background-image: url("./images/pxbackgrounds/ethindia.png");
 	background-size: 160px 160px;
 	aspect-ratio: 1/1;
 	height: 160px;
@@ -318,7 +317,6 @@ a {
 
 #pxfg {
 	position: absolute;
-	background-image: url("./images/pfp_assets/Aadi.png");
 	background-size: 160px 160px;
 	aspect-ratio: 1/1;
 	height: 160px;
