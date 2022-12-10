@@ -244,6 +244,9 @@ body {
 	font-size: 3px;
 	left: 50%;
 	transform: translate(-50%, 0%);
+	cursor: -moz-pointer;
+	cursor: -webkit-pointer;
+	cursor: pointer;
 }
 
 /* Tooltip text */
@@ -290,7 +293,8 @@ a {
 
 #playbutton {
 	display: none;
-	box-shadow: inset 0px -105px rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0px -15px rgba(0, 0, 0, 0.2),
+		inset 0px 5px rgba(255, 255, 255, 0.2);
 }
 
 .shy {
@@ -349,6 +353,8 @@ a {
 
 	display: none;
 	transition-duration: 1s;
+	box-shadow: inset -5px -5px rgba(0, 0, 0, 0.2),
+		inset 5px 5px rgba(255, 255, 255, 0.2);
 }
 
 #viewer {
