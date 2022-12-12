@@ -175,7 +175,7 @@ function loadAssets() {
 		if (reset) {
 			i--;
 		}
-		console.log(i);
+		// console.log(i);
 		reset = areaFilled(ctrx, ctry);
 
 		if (i == "length") break;
@@ -187,14 +187,14 @@ function loadAssets() {
 			if (ctrx != mapWidth && ctrx + radius <= mapWidth) {
 				ctrx++;
 			} else {
-				console.log("im here");
+				// console.log("im here");
 				if (ctry != mapHeight && ctry + radius <= mapHeight) {
 					ctry++;
 					ctrx = 0;
 				}
 			}
 		}
-		console.log(ctrx + ":" + ctry);
+		// console.log(ctrx + ":" + ctry);
 
 		// console.log(i);
 		// console.log(pxls[i].innerHTML);
@@ -248,7 +248,7 @@ function toggleMotion() {
 
 async function changeViewer(show, name, premium, type) {
 	if (show) {
-		console.log("name:" + name);
+		// console.log("name:" + name);
 		viewer = document.getElementById("nftviewer");
 		viewer.classList.remove("nftviewerclose");
 		viewer.style.display = "flex";
