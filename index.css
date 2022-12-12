@@ -161,6 +161,18 @@ body {
 	#camera {
 		aspect-ratio: 9/16;
 	}
+
+	.gamecont h1 {
+		font-size: 48px;
+		line-height: 0.8;
+	}
+	p {
+		font-size: 14px !important;
+	}
+
+	#playbutton {
+		font-size: 20px;
+	}
 }
 
 #map {
@@ -361,12 +373,19 @@ a {
 	overflow: hidden;
 
 	animation: slideinleftbottom 2s cubic-bezier(0.71, 0, 0.33, 1.56);
+	transform: scale(1);
 
 	display: none;
 	transition-duration: 1s;
-	transition-timing-function: ease-in-out;
+	transition-timing-function: cubic-bezier(0.71, 0, 0.33, 1.26);
+	transition-property: all;
 	box-shadow: inset -5px -5px rgba(0, 0, 0, 0.2),
 		inset 5px 5px rgba(255, 255, 255, 0.2);
+}
+
+#nftviewer:hover {
+	transform: scale(1.02);
+	/* transition: ; */
 }
 
 #viewer {
@@ -399,6 +418,10 @@ a {
 
 	#nftviewer p {
 		width: 80px;
+	}
+
+	#buttonsecondtext {
+		display: none;
 	}
 }
 .nftviewerclose {
