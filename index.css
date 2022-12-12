@@ -159,7 +159,8 @@ body {
 
 @media only screen and (max-width: 768px) {
 	#camera {
-		aspect-ratio: 9/16;
+		aspect-ratio: none;
+		width: 100%;
 	}
 
 	.gamecont h1 {
