@@ -234,13 +234,15 @@ function toggleMotion() {
 	if (moving) {
 		map.classList.add("pause");
 		camera.classList.remove("unscrollable");
-		button.innerText = "Resume Animation";
+		button.innerHTML =
+			"Resume <span id='buttonsecondtext'> &nbsp;Animation</span> ";
 		map.style.top = "0px";
 		map.style.left = "0px";
 	} else {
 		map.classList.remove("pause");
 		camera.classList.add("unscrollable");
-		button.innerText = "Pause Animation";
+		button.innerHTML =
+			"Pause <span id='buttonsecondtext'> &nbsp;Animation</span> ";
 	}
 }
 
