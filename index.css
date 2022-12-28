@@ -354,7 +354,13 @@ a {
 
 .nftimg {
 	position: relative;
+	/* height: 160px;
+	width: 160px; */
 	border: 3px solid rgba(0, 0, 0, 0.3);
+}
+
+.pximg {
+	display: inline-flex;
 }
 
 #nftviewer {
@@ -384,9 +390,15 @@ a {
 		inset 5px 5px rgba(255, 255, 255, 0.2);
 }
 
-#nftviewer:hover {
-	transform: scale(1.02);
-	/* transition: ; */
+/* #nftviewer:hover {
+	transform: scale(1.02) translate(-1%, -1%);
+} */
+
+#nftviewer:hover > .downloadButton {
+	height: auto !important;
+	transition-duration: 50ms;
+	transition-timing-function: cubic-bezier(0.71, 0, 0.33, 1.56);
+	padding: 10px;
 }
 
 #viewer {
@@ -432,4 +444,96 @@ a {
 	transform: rotate(30deg);
 	transition-timing-function: cubic-bezier(0.71, 0, 0.33, 1.56);
 	/* display: none; */
+}
+
+canvas {
+	display: none;
+}
+
+.downloadButton {
+	background: #c4f0fa;
+	color: black;
+	text-align: center;
+	box-shadow: inset -5px -5px rgba(0, 0, 0, 0.2),
+		inset 5px 5px rgba(255, 255, 255, 0.5);
+	overflow: hidden;
+	text-decoration: none;
+	height: 0px !important;
+	display: block;
+	transition-duration: 100ms;
+
+	transition-timing-function: cubic-bezier(0.71, 0, 0.33, 1.56);
+
+	user-select: none;
+	cursor: pointer;
+}
+
+.tooltip:hover > #spotlight {
+	width: 64px;
+	height: 64px;
+	background-color: rgba(255, 255, 255, 0.5);
+	mix-blend-mode: soft-light;
+	display: block !important;
+	border-radius: 100%;
+	transform: translate(-24px, -12px);
+	transition-duration: 1s;
+}
+
+.spotlight {
+	display: block !important;
+
+	transform: translate(-24px, -12px);
+	transition-duration: 1s;
+	opacity: 100%;
+}
+
+#spotlight {
+	display: none;
+	z-index: 999;
+	position: absolute !important;
+	width: 64px;
+	height: 64px;
+	background-color: rgba(255, 255, 255, 0.5);
+	mix-blend-mode: soft-light;
+	border-radius: 100%;
+	filter: blur(10px);
+	user-select: none;
+	pointer-events: none;
+}
+
+.spotlightClose {
+	opacity: 0;
+}
+
+#overlay {
+	z-index: 998;
+	user-select: none;
+	pointer-events: none;
+	transition-delay: 50ms;
+	transition-duration: 1s;
+
+	background-color: rgba(0, 0, 0, 0.4);
+	position: absolute;
+	mix-blend-mode: soft-light;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.overlayOpen {
+	display: block !important;
+
+	transition-duration: 1s;
+	transition-delay: 20ms;
+	transition: all;
+}
+
+.overlayClose {
+	opacity: 0%;
+	transition-duration: 2s;
+	transition-delay: 200ms;
+	transition: all;
 }

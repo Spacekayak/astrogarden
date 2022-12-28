@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="./pixelbutton.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="html2canvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.js"></script>
+
+
 
 
 </head>
@@ -30,20 +35,27 @@
 
             <div id="camera" class="unscrollable">
                 <div id="map">
+                    <div id="spotlight"></div>
+                    <div id="overlay"></div>
                 </div>
             </div>
 
             <div id="nftviewer">
                 <div class="nftimg">
+                    <div class="pximg">
+                        <img id="pxfg" alt="">
+                        <img id="pxbg" alt="">
+                    </div>
 
-                    <img id="pxfg" alt="">
-                    <img id="pxbg" alt="">
                 </div>
-                <p id="assetName">Name Comes here and then</p>
+                <p id="assetName">Name Comes here</p>
+
+                <a id="download" class="downloadButton" style="width: 100%;" onclick="download2()"
+                    download="download.png">Tweet</a>
             </div>
         </div>
         <br>
-        <div id="playbutton" onclick="toggleMotion(); " class="pixel2">Pause <span id="buttonsecondtext">
+        <div id="playbutton" onclick="toggleMotion(); " class="pixel2"> Pause <span id="buttonsecondtext">
                 &nbsp;Animation</span> </div>
 
     </div>
@@ -51,5 +63,8 @@
 
 <script src="index.js"></script>
 <script src="data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"
+    integrity="sha512-wUa0ktp10dgVVhWdRVfcUO4vHS0ryT42WOEcXjVVF2+2rcYBKTY7Yx7JCEzjWgPV+rj2EDUr8TwsoWF6IoIOPg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </html>

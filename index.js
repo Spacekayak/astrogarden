@@ -20,9 +20,29 @@ function loadAssets() {
 	var button = document.getElementById("playbutton");
 	var loader = document.getElementById("loader");
 	var gamecont = document.getElementsByClassName("gamecont")[0];
+	var overlay = document.getElementById("overlay");
+	var spotlight = document.getElementById("spotlight");
+
 	gamecont.addEventListener("onmouseover", function () {
+		alert("oh");
 		changeViewer(false);
 	});
+
+	viewer = document.getElementById("nftviewer");
+
+	viewer.addEventListener("mouseover", function () {
+		spotlight.classList.remove("spotlightClose");
+		spotlight.classList.add("spotlight");
+		overlay.classList.remove("overlayClose");
+		overlay.classList.add("overlayOpen");
+	});
+	viewer.addEventListener("mouseout", function () {
+		spotlight.classList.add("spotlightClose");
+		spotlight.classList.remove("spotlight");
+		overlay.classList.remove("overlayOpen");
+		overlay.classList.add("overlayClose");
+	});
+
 	initCovered();
 	// console.log(covered);
 	map.style.width = mapWidth + "px";
@@ -56,8 +76,6 @@ function loadAssets() {
 						covered[x][y] = true;
 				}
 			}
-
-			// console.log(covered.toString());
 
 			map.appendChild(img);
 		}
@@ -148,10 +166,17 @@ function loadAssets() {
 
 	avatars.forEach((avatar, i) => {
 		avatar.addEventListener("mouseover", function () {
-			changeViewer(true, pfpData[i].url, pfpData[i].premium, pfpData[i].type);
+			changeViewer(
+				true,
+				pfpData[i].url,
+				pfpData[i].premium,
+				pfpData[i].type,
+				avatar.style.left,
+				avatar.style.top
+			);
 		});
 		avatar.addEventListener("mouseout", function () {
-			changeViewer(false, pfpData[i].url, pfpData[i].premium, pfpData[i].type);
+			changeViewer(false);
 		});
 	});
 
@@ -169,22 +194,26 @@ function loadAssets() {
 	reset = false;
 
 	for (var i = 0; i < pxls.length; ++i) {
-		// console.log(covered[ctrx][ctry]);
-		// console.log(pfpData[i].url, i);
-
-		if (reset) {
-			i--;
-		}
-		// console.log(i);
 		reset = areaFilled(ctrx, ctry);
 
 		if (i == "length") break;
 		if (!reset) {
 			pxls[i].style.left = ctrx + "px";
 			pxls[i].style.top = ctry + "px";
+			// console.log(
+			// 	i +
+			// 		":" +
+			// 		pxls[i].style.left +
+			// 		":" +
+			// 		pxls[i].style.top +
+			// 		":" +
+			// 		pfpData[i].url
+			// );
+
 			fillArea(ctrx, ctry);
 		} else {
 			if (ctrx != mapWidth && ctrx + radius <= mapWidth) {
+				// console.log("im here");
 				ctrx++;
 			} else {
 				// console.log("im here");
@@ -193,6 +222,22 @@ function loadAssets() {
 					ctrx = 0;
 				}
 			}
+			// console.log(
+			// 	i +
+			// 		":" +
+			// 		pxls[i].style.left +
+			// 		":" +
+			// 		pxls[i].style.top +
+			// 		":" +
+			// 		pfpData[i].url +
+			// 		ctrx +
+			// 		":" +
+			// 		ctry
+			// );
+		}
+
+		if (reset) {
+			i--;
 		}
 		// console.log(ctrx + ":" + ctry);
 
@@ -246,10 +291,18 @@ function toggleMotion() {
 	}
 }
 
-async function changeViewer(show, name, premium, type) {
+async function changeViewer(show, name, premium, type, x, y) {
 	if (show) {
 		// console.log("name:" + name);
 		viewer = document.getElementById("nftviewer");
+		spotlight.classList.remove("spotlightClose");
+		spotlight = document.getElementById("spotlight");
+		overlay = document.getElementById("overlay");
+		spotlight.style.left = x;
+		spotlight.style.top = y;
+		spotlight.classList.add("spotlight");
+		overlay.classList.remove("overlayClose");
+		overlay.classList.add("overlayOpen");
 		viewer.classList.remove("nftviewerclose");
 		viewer.style.display = "flex";
 		img = document.getElementById("pxfg");
@@ -266,8 +319,76 @@ async function changeViewer(show, name, premium, type) {
 		// viewer.style.display = "flex";
 	} else {
 		viewer.classList.add("nftviewerclose");
+		spotlight.classList.add("spotlightClose");
+		spotlight.classList.remove("spotlight");
+		overlay.classList.remove("overlayOpen");
+		overlay.classList.add("overlayClose");
+
 		// viewer.classList.remove("nftviewerclose");
 	}
 }
 
 // document.onload = loadAssets();
+
+function screenshot() {
+	html2canvas(document.getElementsByClassName("nftimg")[0]).then(function (
+		canvas
+	) {
+		document.getElementsByClassName("gamecont")[0].appendChild(canvas);
+	});
+}
+
+function downloadScreenshot() {
+	var download = document.getElementById("download");
+
+	html2canvas(document.getElementsByClassName("gamecont")[0]).then(function (
+		canvas
+	) {
+		document.getElementsByClassName("gamecont")[0].appendChild(canvas);
+		// canvas.display.transform = "scale(3)";
+		var image = canvas
+			.toDataURL("image/png")
+			.replace("image/png", "image/octet-stream");
+		download.setAttribute("href", image);
+		document.getElementsByClassName("gamecont")[0].removeChild(canvas);
+	});
+}
+
+function download2() {
+	var options = {
+		// width: mapWidth,
+		// height: mapHeight,
+	};
+
+	assetName = document.getElementById("assetName").innerText;
+
+	domtoimage
+		.toBlob(document.getElementById("map"), options)
+		.then(function (blob) {
+			saveAs(blob, assetName + "| Astrogarden by Spacekayak.png");
+		});
+}
+
+var getPostTitle =
+		"gm frens!%0aETHIndia might be over, but Astrogarden is forever!%0aSpot me at Astrogarden by @spacekayak: astrogarden.netlify.app/%0a%0a(add in the image that was just downloaded and delete this line and you're good to share!)",
+	linkElement = document.getElementById("download");
+
+$(linkElement).click(function (event) {
+	event.preventDefault();
+
+	if (!window.location.origin) {
+		tweetedLink =
+			window.location.protocol +
+			"//" +
+			window.location.hostname +
+			window.location.pathname;
+	} else {
+		tweetedLink = window.location.origin + window.location.pathname;
+	}
+
+	window.open(
+		"http://twitter.com/intent/tweet?&text=" + getPostTitle,
+		"twitterwindow",
+		"height=450, width=550, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0"
+	);
+});
