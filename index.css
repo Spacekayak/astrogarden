@@ -1,5 +1,10 @@
 /* Default Document Setup */
 
+:root {
+	--mapWidth: 508;
+	--mapHeight: 708;
+}
+
 body {
 	width: 100vw;
 	height: 100vh;
@@ -141,7 +146,7 @@ body {
 
 #camera {
 	/* position: absolute; */
-	/* animation: cameraMotion 40s infinite ease-in-out; */
+	/* animation: bgMotion 40s infinite ease-in-out; */
 	display: block;
 	width: 100%;
 	max-width: 100%;
@@ -151,7 +156,10 @@ body {
 	object-fit: contain;
 	overflow: scroll;
 
-	background-color: #2a704a;
+	/* background-color: #2a704a; */
+	background-color: #2f6943;
+	background-image: url("./images/map_assets/grassnoise.png");
+	background-size: calc(187 * 2.5px) calc(195 * 2.5px);
 	position: relative;
 	animation: load 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 	display: none;
@@ -188,31 +196,52 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
+	overflow: visible;
 }
 
 /* Animations */
 
 @keyframes cameraMotion {
 	0% {
-		top: 0%;
-		left: 0%;
+		top: 30px;
+		left: 30px;
 	}
 	25% {
-		top: 0%;
-		left: -50%;
+		top: 30px;
+		left: calc(-1 * (var(--mapWidth) * 1px));
 	}
 	50% {
-		top: -50%;
-		left: -50%;
+		top: calc(-1 * (var(--mapHeight) * 1px));
+		left: calc(-1 * (var(--mapWidth) * 1px));
 	}
 
 	75% {
-		top: -50%;
-		left: 0%;
+		top: calc(-1 * (var(--mapHeight) * 1px));
+		left: 30px;
 	}
 	100% {
-		top: 0%;
-		left: 0%;
+		top: 30px;
+		left: 30px;
+	}
+}
+
+@keyframes bgMotion {
+	0% {
+		background-position: 30px, 30px;
+	}
+	25% {
+		background-position: calc(-1 * (var(--mapWidth) * 1px)), 30px;
+	}
+	50% {
+		background-position: calc(-1 * (var(--mapWidth) * 1px)),
+			calc(-1 * (var(--mapHeight) * 1px));
+	}
+
+	75% {
+		background-position: 30px, calc(-1 * (var(--mapHeight) * 1px));
+	}
+	100% {
+		background-position: 30px, 30px;
 	}
 }
 
@@ -293,6 +322,20 @@ body {
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+
+.tooltipHover {
+	transform: translate(-2px, -10px) scale(1.2);
+	transform-origin: center;
+	transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.tooltipRegular {
+	transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.tooltipHover .tooltiptext {
 	visibility: visible;
 }
 
@@ -471,7 +514,7 @@ canvas {
 .tooltip:hover > #spotlight {
 	width: 64px;
 	height: 64px;
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(255, 255, 255, 0.3);
 	mix-blend-mode: soft-light;
 	display: block !important;
 	border-radius: 100%;
@@ -482,19 +525,19 @@ canvas {
 .spotlight {
 	display: block !important;
 
-	transform: translate(-24px, -12px);
+	transform: translate(-24px, -6px);
 	transition-duration: 1s;
 	opacity: 100%;
 }
 
 #spotlight {
 	display: none;
-	z-index: 999;
+	z-index: 1;
 	position: absolute !important;
 	width: 64px;
 	height: 64px;
 	background-color: rgba(255, 255, 255, 0.5);
-	mix-blend-mode: soft-light;
+	/* mix-blend-mode: soft-light; */
 	border-radius: 100%;
 	filter: blur(10px);
 	user-select: none;
@@ -506,7 +549,7 @@ canvas {
 }
 
 #overlay {
-	z-index: 998;
+	z-index: 1;
 	user-select: none;
 	pointer-events: none;
 	transition-delay: 50ms;

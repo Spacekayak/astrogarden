@@ -5,6 +5,9 @@ var mapWidth = 458,
 var radius = 18;
 var moving = true;
 
+// document.documentElement.style.setProperty("--mapWidth", mapWidth);
+// document.documentElement.style.setProperty("--mapHeight", mapHeight);
+
 function initCovered() {
 	for (var i = 0; i < mapWidth; ++i) {
 		covered[i] = [];
@@ -99,7 +102,7 @@ function loadAssets() {
 		per.style.height = "32px";
 		per.style.width = "32px";
 
-		body.style.zIndex = i;
+		body.style.zIndex = i + 1;
 
 		switch (i % 5) {
 			case 0:
@@ -163,24 +166,39 @@ function loadAssets() {
 
 	pxls = document.getElementsByClassName("tooltip");
 	avatars = document.querySelectorAll(".tooltip");
+	viewer = document.getElementById("nftviewer");
 
 	avatars.forEach((avatar, i) => {
-		avatar.addEventListener("mouseover", function () {
-			changeViewer(
-				true,
-				pfpData[i].url,
-				pfpData[i].premium,
-				pfpData[i].type,
-				avatar.style.left,
-				avatar.style.top
-			);
-		});
-		avatar.addEventListener("mouseout", function () {
-			changeViewer(false);
-		});
+		(function (avatar, i) {
+			assetName = document.getElementById("assetName");
+
+			avatar.addEventListener("mouseover", function () {
+				changeViewer(
+					true,
+					pfpData[i].url,
+					pfpData[i].premium,
+					pfpData[i].type,
+					avatar.style.left,
+					avatar.style.top
+				);
+			});
+			avatar.addEventListener("mouseout", function () {
+				changeViewer(false);
+			});
+
+			viewer.addEventListener("mouseover", function () {
+				if (assetName.innerText == pfpData[i].url) {
+					avatars[i].classList.add("tooltipHover");
+					avatars[i].classList.remove("tooltipRegular");
+				}
+			});
+			viewer.addEventListener("mouseout", function () {
+				avatars[i].classList.remove("tooltipHover");
+				avatars[i].classList.add("tooltipRegular");
+			});
+		})(avatar, i);
 	});
 
-	viewer = document.getElementById("nftviewer");
 	viewer.addEventListener("mouseover", function () {
 		viewer.classList.remove("nftviewerclose");
 	});
@@ -250,6 +268,8 @@ function loadAssets() {
 	camera.style.display = "block";
 	button.style.display = "flex";
 	loader.style.display = "none";
+
+	avatarTransforms();
 }
 
 function areaFilled(x, y) {
@@ -330,51 +350,78 @@ async function changeViewer(show, name, premium, type, x, y) {
 
 // document.onload = loadAssets();
 
-function screenshot() {
-	html2canvas(document.getElementsByClassName("nftimg")[0]).then(function (
-		canvas
-	) {
-		document.getElementsByClassName("gamecont")[0].appendChild(canvas);
-	});
+function avatarTransforms() {
+	var avatars = document.getElementsByClassName("tooltip");
+	for (var i = 0; i < avatars.length; ++i) {
+		(function (i) {
+			avatars[i].addEventListener("mouseover", function () {
+				avatars[i].classList.add("tooltipHover");
+				avatars[i].classList.remove("tooltipRegular");
+			});
+			avatars[i].addEventListener("mouseout", function () {
+				avatars[i].classList.remove("tooltipHover");
+				avatars[i].classList.add("tooltipRegular");
+			});
+		})(i);
+	}
+
+	// for (var i = 0; i < gmButtons.length; i++) {
+	// 	(function (i) {
+	// 		gmButtons[i].addEventListener("mouseover", function () {
+	// 			clearTimeout(t);
+	// 			t = setTimeout(function () {
+	// 				gmToolTip.innerHTML = toolTips[i];
+	// 			}, 500);
+	// 		});
+	// 		gmButtons[i].addEventListener("mouseout", function () {
+	// 			gmTooltip.innerHTML = null;
+	// 			clearTimeout(t);
+	// 		});
+	// 	})(i);
+	// }
 }
 
-function downloadScreenshot() {
-	var download = document.getElementById("download");
-
-	html2canvas(document.getElementsByClassName("gamecont")[0]).then(function (
-		canvas
-	) {
-		document.getElementsByClassName("gamecont")[0].appendChild(canvas);
-		// canvas.display.transform = "scale(3)";
-		var image = canvas
-			.toDataURL("image/png")
-			.replace("image/png", "image/octet-stream");
-		download.setAttribute("href", image);
-		document.getElementsByClassName("gamecont")[0].removeChild(canvas);
-	});
+function scroller() {
+	map = document.getElementById("map");
+	map.document.scrollTop = 0;
+	map.documentElement.scrollTop = 0;
 }
 
-function download2() {
+async function download2() {
+	var returnMotion = moving;
 	var options = {
 		// width: mapWidth,
 		// height: mapHeight,
 	};
 
+	camera = document.getElementById("camera");
+	map = document.getElementById("map");
+
+	camera.classList.add("unscrollable");
+
+	if (moving) {
+		map.classList.add("pause");
+	}
+
 	assetName = document.getElementById("assetName").innerText;
 
-	domtoimage
+	await domtoimage
 		.toBlob(document.getElementById("map"), options)
 		.then(function (blob) {
 			saveAs(blob, assetName + "| Astrogarden by Spacekayak.png");
 		});
+
+	shareTweet();
+	if (returnMotion) {
+		map.classList.remove("pause");
+	} else {
+	}
+	camera.classList.remove("unscrollable");
 }
 
-var getPostTitle =
-		"gm frens!%0aETHIndia might be over, but Astrogarden is forever!%0aSpot me at Astrogarden by @spacekayak: astrogarden.netlify.app/%0a%0a(add in the image that was just downloaded and delete this line and you're good to share!)",
-	linkElement = document.getElementById("download");
-
-$(linkElement).click(function (event) {
-	event.preventDefault();
+function shareTweet() {
+	var getPostTitle =
+		"gm frens!%0aETHIndia might be over, but Astrogarden is forever!%0aSpot me at Astrogarden by @spacekayak: astrogarden.netlify.app/%0a%0a(add in the image that was just downloaded and delete this line and you're good to share!)";
 
 	if (!window.location.origin) {
 		tweetedLink =
@@ -391,4 +438,4 @@ $(linkElement).click(function (event) {
 		"twitterwindow",
 		"height=450, width=550, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0"
 	);
-});
+}
