@@ -388,8 +388,9 @@ function scroller() {
 }
 
 async function download2() {
-	var returnMotion = moving;
 	var options = {
+		// width: 458,
+		// height: 458,
 		// width: mapWidth,
 		// height: mapHeight,
 	};
@@ -399,23 +400,16 @@ async function download2() {
 
 	camera.classList.add("unscrollable");
 
-	if (moving) {
-		map.classList.add("pause");
-	}
-
 	assetName = document.getElementById("assetName").innerText;
 
 	await domtoimage
-		.toBlob(document.getElementById("map"), options)
+		.toBlob(document.getElementById("viewer"), options)
 		.then(function (blob) {
 			saveAs(blob, assetName + "| Astrogarden by Spacekayak.png");
 		});
 
 	shareTweet();
-	if (returnMotion) {
-		map.classList.remove("pause");
-	} else {
-	}
+
 	camera.classList.remove("unscrollable");
 }
 
