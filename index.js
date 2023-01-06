@@ -62,11 +62,11 @@ function loadAssets() {
 	var gamecontapple = document.getElementsByClassName("gamecont")[1];
 
 	if (iOS()) {
-		alert("isOS");
+		// alert("isOS");
 		gamecont.style.display = "none";
 		gamecontapple.style.display = "flex";
 	} else {
-		alert("isNOTOS");
+		// alert("isNOTOS");
 		gamecont.style.display = "flex";
 		gamecontapple.style.display = "none";
 	}
