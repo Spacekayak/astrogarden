@@ -462,7 +462,7 @@ async function download2() {
 
 function shareTweet() {
 	var getPostTitle =
-		"gm frens!%0aETHIndia might be over, but Astrogarden is forever!%0aSpot me at Astrogarden by @spacekayak: astrogarden.netlify.app/%0a%0a(add in the image that was just downloaded and delete this line and you're good to share!)";
+		"gm frens!%0aETHIndia might be over, but Astrogarden is forever!%0aSpot me at Astrogarden by @spacekayak: astrogarden.netlify.app/%0a%0a";
 
 	if (!window.location.origin) {
 		tweetedLink =
