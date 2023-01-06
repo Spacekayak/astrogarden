@@ -21,7 +21,7 @@
 <body onload="loadAssets()">
     <iframe src="https://www.youtube.com/watch?v=aZnPjwXTap4" allow="autoplay" id="audio"
         style="position: absolute; display: none"></iframe>
-    <audio id="myAudio" controls autoplay loop style="visibility: hidden; height: 0px; width: 0px;position: absolute;">
+    <audio id="myAudio" controls loop style="visibility: hidden; height: 0px; width: 0px;position: absolute;">
         <source src="./music/Pix - Space travel.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -62,8 +62,13 @@
             </div>
         </div>
         <br>
-        <div id="playbutton" onclick="toggleMotion(); " class="pixel2"> Pause <span id="buttonsecondtext">
-                &nbsp;Animation</span> </div>
+        <div style="display: flex; align-items: center; column-gap: 20px;">
+            <div id="playbutton" onclick="toggleMotion(); " class="pixel2"> Pause <span id="buttonsecondtext">
+                    &nbsp;Animation</span> </div>
+            <div id="playbutton2" onclick="playMusic(); " class="pixel2" style="display: none;"></span> <img
+                    width="30px" height="30px" src="./images/icons/muted.svg" alt=""></div>
+
+        </div>
 
     </div>
 </body>

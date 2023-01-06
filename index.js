@@ -17,8 +17,12 @@ function initCovered() {
 	}
 }
 
-function loadAssets() {
+function playMusic() {
 	var audio = document.getElementById("myAudio");
+	audio.play();
+}
+
+function loadAssets() {
 	var map = document.getElementById("map");
 	var camera = document.getElementById("camera");
 	var button = document.getElementById("playbutton");
@@ -27,7 +31,7 @@ function loadAssets() {
 	var overlay = document.getElementById("overlay");
 	var spotlight = document.getElementById("spotlight");
 
-	audio.play();
+	document.getElementById("playbutton2").click();
 
 	gamecont.addEventListener("onmouseover", function () {
 		alert("oh");
