@@ -158,7 +158,7 @@ body {
 
 	/* background-color: #2a704a; */
 	background-color: #2f6943;
-	background-image: url("./images/map_assets/grassnoise.png");
+	background-image: url("./images/map_assets/grassnoise_1400.png");
 	background-size: calc(187 * 2.5px) calc(195 * 2.5px);
 	position: relative;
 	animation: load 2s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -186,7 +186,7 @@ body {
 
 #map {
 	background-color: #2f6943;
-	background-image: url("./images/map_assets/grassnoise.png");
+	background-image: url("./images/map_assets/grassnoise_1400.png");
 	animation: cameraMotion 40s infinite ease-in-out;
 
 	background-size: 187px 195px;
