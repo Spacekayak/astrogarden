@@ -36,6 +36,7 @@ function playMusic() {
 }
 
 function iOS() {
+	return false;
 	return (
 		[
 			"iPad Simulator",
