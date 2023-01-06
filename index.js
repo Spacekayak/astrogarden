@@ -5,6 +5,8 @@ var mapWidth = 458,
 var radius = 18;
 var moving = true;
 
+var audioPaused = true;
+
 // document.documentElement.style.setProperty("--mapWidth", mapWidth);
 // document.documentElement.style.setProperty("--mapHeight", mapHeight);
 
@@ -18,8 +20,34 @@ function initCovered() {
 }
 
 function playMusic() {
+	var button = document.getElementById("playbutton2");
+	var img = document.getElementById("musicImg");
 	var audio = document.getElementById("myAudio");
-	audio.play();
+	if (audioPaused) {
+		audio.play();
+		button.style.backgroundColor = "blue";
+		img.src = "./images/icons/unmuted.svg";
+		audioPaused = false;
+	} else {
+		audio.pause();
+		audioPaused = true;
+		img.src = "./images/icons/muted.svg";
+	}
+}
+
+function iOS() {
+	return (
+		[
+			"iPad Simulator",
+			"iPhone Simulator",
+			"iPod Simulator",
+			"iPad",
+			"iPhone",
+			"iPod",
+		].includes(navigator.platform) ||
+		// iPad on iOS 13 detection
+		(navigator.userAgent.includes("Mac") && "ontouchend" in document)
+	);
 }
 
 function loadAssets() {
@@ -31,7 +59,19 @@ function loadAssets() {
 	var overlay = document.getElementById("overlay");
 	var spotlight = document.getElementById("spotlight");
 
-	document.getElementById("playbutton2").click();
+	var gamecontapple = document.getElementsByClassName("gamecont")[1];
+
+	if (iOS()) {
+		alert("isOS");
+		gamecont.style.display = "none";
+		gamecontapple.style.display = "flex";
+	} else {
+		alert("isNOTOS");
+		gamecont.style.display = "flex";
+		gamecontapple.style.display = "none";
+	}
+
+	// document.getElementById("playbutton2").click();
 
 	gamecont.addEventListener("onmouseover", function () {
 		alert("oh");
