@@ -187,7 +187,7 @@ body {
 #map {
 	background-color: #2f6943;
 	background-image: url("./images/map_assets/grassnoise_1400.png");
-	/* animation: cameraMotion 40s infinite ease-in-out; */
+	animation: cameraMotion 40s infinite ease-in-out;
 
 	background-size: 187px 195px;
 	transform: scale(2.5);
